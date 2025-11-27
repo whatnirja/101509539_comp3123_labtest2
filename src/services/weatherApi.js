@@ -1,21 +1,21 @@
 import axios from "axios";
 
-const API_BASE = "https://api.openweathermap.org/data/2.5/weather";
+const API_URL = "https://api.weatherapi.com/v1/current.json";
 
 export const fetchWeatherByCity = async (city) => {
-  const apiKey = process.env.REACT_APP_OPENWEATHER_KEY;
+  const key = process.env.REACT_APP_WEATHERAPI_KEY;
 
-  if (!apiKey) {
-    throw new Error("Missing REACT_APP_OPENWEATHER_KEY in .env");
-  }
+  if (!key) throw new Error("Missing REACT_APP_WEATHERAPI_KEY");
 
-  const response = await axios.get(API_BASE, {
+  const response = await axios.get(API_URL, {
     params: {
+      key: key,
       q: city,
-      appid: apiKey,
-      units: "metric",
     },
   });
+
+  console.log("ENV KEY:", process.env.REACT_APP_WEATHERAPI_KEY);
+  console.log("API KEY:", key);
 
   return response.data;
 };

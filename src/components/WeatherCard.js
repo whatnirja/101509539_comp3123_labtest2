@@ -3,6 +3,7 @@ import React from "react";
 const WeatherCard = ({
   city,
   country,
+  region,
   temp,
   feelsLike,
   humidity,
@@ -10,9 +11,7 @@ const WeatherCard = ({
   description,
   icon,
 }) => {
-  const iconUrl = icon
-    ? `http://openweathermap.org/img/wn/${icon}@2x.png`
-    : null;
+  const iconUrl = icon ? `https:${icon}` : null;
 
   return (
     <div className="weather-card">
@@ -20,12 +19,17 @@ const WeatherCard = ({
         <div>
           <h2 className="weather-city">
             {city}
+            {region ? `, ${region}` : ""}
             {country ? `, ${country}` : ""}
           </h2>
+
           <p className="weather-description">
-            {description ? description.charAt(0).toUpperCase() + description.slice(1) : "-"}
+            {description
+              ? description.charAt(0).toUpperCase() + description.slice(1)
+              : "-"}
           </p>
         </div>
+
         {iconUrl && (
           <img
             src={iconUrl}
@@ -39,10 +43,14 @@ const WeatherCard = ({
         <div className="temp-main">
           {temp !== undefined ? `${Math.round(temp)}°C` : "--"}
         </div>
+
         <div className="temp-details">
-          <p>Feels like: {feelsLike !== undefined ? `${Math.round(feelsLike)}°C` : "--"}</p>
+          <p>
+            Feels like:{" "}
+            {feelsLike !== undefined ? `${Math.round(feelsLike)}°C` : "--"}
+          </p>
           <p>Humidity: {humidity !== undefined ? `${humidity}%` : "--"}</p>
-          <p>Wind: {windSpeed !== undefined ? `${windSpeed} m/s` : "--"}</p>
+          <p>Wind: {windSpeed !== undefined ? `${windSpeed} kph` : "--"}</p>
         </div>
       </div>
     </div>

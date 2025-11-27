@@ -10,30 +10,35 @@ function App() {
   const [error, setError] = useState("");
 
   const loadWeather = async (cityName) => {
-    try {
-      setLoading(true);
-      setError("");
-      const data = await fetchWeatherByCity(cityName);
-      const mapped = {
-        city: data.name,
-        country: data.sys?.country,
-        temp: data.main?.temp,
-        feelsLike: data.main?.feels_like,
-        humidity: data.main?.humidity,
-        windSpeed: data.wind?.speed,
-        description: data.weather?.[0]?.description,
-        icon: data.weather?.[0]?.icon,
-      };
-      setWeather(mapped);
-      setCity(cityName);
-    } catch (err) {
-      console.error(err);
-      setError("Could not find weather for that city. Try again.");
-      setWeather(null);
-    } finally {
-      setLoading(false);
-    }
+  try {
+    setLoading(true);
+    setError("");
+    const data = await fetchWeatherByCity(cityName);
+
+    const mapped = {
+    city: data.location?.name,
+    region: data.location?.region,
+    country: data.location?.country,
+    temp: data.current?.temp_c,
+    feelsLike: data.current?.feelslike_c,
+    humidity: data.current?.humidity,
+    windSpeed: data.current?.wind_kph,
+    description: data.current?.condition?.text,
+    icon: data.current?.condition?.icon,
   };
+
+
+    setWeather(mapped);
+    setCity(cityName);
+  } catch (err) {
+    console.error(err);
+    setError("Could not find weather for that city. Try again.");
+    setWeather(null);
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   useEffect(() => {
     loadWeather(city);
