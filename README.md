@@ -3,6 +3,9 @@
 ## Live Demo
 https://101509539-comp3123-labtest2.vercel.app/
 
+## API Used
+https://www.weatherapi.com
+
 ## Project Description
 This project is a React-based weather application that allows users to search for real-time weather information for any city. The app uses the WeatherAPI service to retrieve data such as temperature, weather conditions, humidity, wind speed, and related details. The interface is simple, clean, and easy to navigate.
 
