@@ -1,7 +1,6 @@
 import axios from "axios";
 
-const API_URL = "https://api.weatherapi.com/v1/current.json";
-
+const API_URL =" https://cors-anywhere.herokuapp.com/https://api.weatherapi.com/v1/current.json"; //CORS proxy 
 export const fetchWeatherByCity = async (city) => {
   const key = process.env.REACT_APP_WEATHERAPI_KEY;
 
